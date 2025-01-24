@@ -35,9 +35,9 @@
         </dependency>
 
         <dependency>
-            <groupId>io.github.Slimefun</groupId>
+            <groupId>top.craft233</groupId>
             <artifactId>Slimefun4</artifactId>
-            <version>RC-28</version>
+            <version>b39097e015</version>
             <scope>provided</scope>
         </dependency>
 
@@ -63,17 +63,10 @@
         </dependency>
 
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>5.7.2</version>
-            <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.github.seeseemelk</groupId>
-            <artifactId>MockBukkit-v1.16</artifactId>
-            <version>1.5.0</version>
-            <scope>test</scope>
+            <groupId>com.github.technicallycoded</groupId>
+            <artifactId>FoliaLib</artifactId>
+            <version>0.4.3</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -132,7 +125,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-shade-plugin</artifactId>
-                <version>3.2.4</version>
+                <version>3.6.0</version>
 
                 <configuration>
                     <relocations>

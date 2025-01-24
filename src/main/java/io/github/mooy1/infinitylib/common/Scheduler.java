@@ -2,6 +2,8 @@ package io.github.mooy1.infinitylib.common;
 
 import javax.annotation.ParametersAreNonnullByDefault;
 
+import com.tcoded.folialib.FoliaLib;
+
 import lombok.experimental.UtilityClass;
 
 import org.bukkit.Bukkit;
@@ -16,21 +18,24 @@ import io.github.mooy1.infinitylib.core.AbstractAddon;
 @UtilityClass
 @ParametersAreNonnullByDefault
 public final class Scheduler {
+    public static FoliaLib getFoliaLib() {
+        return new FoliaLib(AbstractAddon.instance());
+    }
 
     public static void run(Runnable runnable) {
-        Bukkit.getScheduler().runTask(AbstractAddon.instance(), runnable);
+        getFoliaLib().getScheduler().runNextTick(wrappedTask -> runnable.run());
     }
 
     public static void runAsync(Runnable runnable) {
-        Bukkit.getScheduler().runTaskAsynchronously(AbstractAddon.instance(), runnable);
+        getFoliaLib().getScheduler().runAsync(wrappedTask -> runnable.run());
     }
 
     public static void run(int delayTicks, Runnable runnable) {
-        Bukkit.getScheduler().runTaskLater(AbstractAddon.instance(), runnable, delayTicks);
+        getFoliaLib().getScheduler().runLater(runnable, delayTicks);
     }
 
     public static void runAsync(int delayTicks, Runnable runnable) {
-        Bukkit.getScheduler().runTaskLaterAsynchronously(AbstractAddon.instance(), runnable, delayTicks);
+        getFoliaLib().getScheduler().runLaterAsync(runnable, delayTicks);
     }
 
     public static void repeat(int intervalTicks, Runnable runnable) {
@@ -42,11 +47,11 @@ public final class Scheduler {
     }
 
     public static void repeat(int intervalTicks, int delayTicks, Runnable runnable) {
-        Bukkit.getScheduler().runTaskTimer(AbstractAddon.instance(), runnable, delayTicks, Math.max(1, intervalTicks));
+        getFoliaLib().getScheduler().runTimer(runnable, delayTicks, Math.max(1, intervalTicks));
     }
 
     public static void repeatAsync(int intervalTicks, int delayTicks, Runnable runnable) {
-        Bukkit.getScheduler().runTaskTimerAsynchronously(AbstractAddon.instance(), runnable, delayTicks, Math.max(1, intervalTicks));
+        getFoliaLib().getScheduler().runTimerAsync(runnable, delayTicks, Math.max(1, intervalTicks));
     }
 
 }
