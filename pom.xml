@@ -133,6 +133,10 @@
                             <pattern>org.bstats</pattern>
                             <shadedPattern>io.github.mooy1.infinitylib.metrics</shadedPattern>
                         </relocation>
+                        <relocation>
+                            <pattern>com.tcoded.folialib</pattern>
+                            <shadedPattern>io.github.mooy1.infinitylib.folialib</shadedPattern>
+                        </relocation>
                     </relocations>
                     <filters>
                         <filter>
