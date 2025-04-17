@@ -34,14 +34,15 @@ jobs:
           key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
           restore-keys: ${{ runner.os }}-m2
 
-      - name: download dough api
+      - name: Download Slimefun from artifact
         uses: dawidd6/action-download-artifact@v9
         with:
           github_token: ${{secrets.GITHUB_TOKEN}}
-          workflow: maven.yml
+          workflow: dev-ci.yml
           workflow_conclusion: success
           repo: Craft233MC/Slimefun4
           use_unzip: true
+          
       - name: Place local depends
         run: |
           export SF=$(ls | grep Slimefun)
