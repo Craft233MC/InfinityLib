@@ -1,6 +1,7 @@
 name: Maven Build
 
 on:
+  workflow_dispatch:
   push:
     branches-ignore:
       - master
@@ -24,5 +25,38 @@ jobs:
           java-version: '8'
           cache: 'maven'
 
+      - name: Cache Maven packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.m2
+          key: ${{ runner.os }}-m2-${{ hashFiles('**/pom.xml') }}
+          restore-keys: ${{ runner.os }}-m2
+
+      - name: download dough api
+        uses: dawidd6/action-download-artifact@v9
+        with:
+          github_token: ${{secrets.GITHUB_TOKEN}}
+          workflow: maven.yml
+          workflow_conclusion: success
+          repo: Craft233MC/Slimefun4
+          use_unzip: true
+      - name: Place local depends
+        run: |
+          export SF=$(ls | grep Slimefun)
+          mvn install:install-file -Dfile=${SF}/${SF} -DgroupId=top.craft233 -DartifactId=Slimefun4 -Dversion=b39097e015 -Dpackaging=jar
+
       - run: mvn package --file pom.xml
+
+      - name: Select jar
+        run: |
+          cd target
+          rm -rf original*
+          rm -rf *sources.jar
+          echo "FILE=$(ls | grep jar)" >> $GITHUB_ENV
+
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ${{ env.FILE }}
+          path: target/${{ env.FILE }}
 
