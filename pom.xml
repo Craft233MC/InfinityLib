@@ -29,7 +29,19 @@
             <id>tcoded-releases</id>
             <url>https://repo.tcoded.com/releases</url>
         </repository>
+
+        <repository>
+            <id>neokoni-repo</id>
+            <url>https://repo.neokoni.ink/snapshots</url>
+        </repository>
     </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>neokoni-repo</id>
+            <url>https://repo.neokoni.ink/snapshots</url>
+        </repository>
+    </distributionManagement>
 
     <dependencies>
         <dependency>
@@ -40,9 +52,9 @@
         </dependency>
 
         <dependency>
-            <groupId>top.craft233</groupId>
-            <artifactId>Slimefun4</artifactId>
-            <version>b39097e015</version>
+            <groupId>com.github.slimefun</groupId>
+            <artifactId>Slimefun</artifactId>
+            <version>DEV-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -160,6 +172,10 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-deploy-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
